@@ -10,28 +10,31 @@ version: '3.7'
 # {"auths":{},"credsStore":"","stackOrchestrator":"swarm"}
 # OR
 # {"auths":{},"stackOrchestrator":"swarm"}
+networks:
+  fullstack-net:
+
 services:
+
   todo-frontend:
-    image: in28min/todo-front-end:0.0.1-SNAPSHOT
-    #build:
-      #context: frontend/todo-app
-      #dockerfile: Dockerfile
+#    image: frontfinal/frontfinal
+    build:
+      context: frontend/todo-app
+      dockerfile: Dockerfile
     ports:
       - "4200:80"
     restart: always
     depends_on: # Start the depends_on first
       - todo-api 
     networks:
-      - fullstack-application-network
+      - fullstack-net
 
   todo-api:
-    image: in28min/rest-api-full-stack:0.0.1-SNAPSHOT
+#    image: backfinal:backfinal
+    build:
+      context: restful-web-services/
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     restart: always
     networks:
-      - fullstack-application-network
-  
-# Networks to be created to facilitate communication between containers
-networks:
-  fullstack-application-network:
+      - fullstack-net
