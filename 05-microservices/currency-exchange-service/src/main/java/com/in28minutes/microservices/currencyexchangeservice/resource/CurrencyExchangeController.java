@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CurrencyExchangeController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyExchangeController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyExchangeController.class);
 
-	@Autowired
-	private ExchangeValueRepository repository;
+    @Autowired
+    private ExchangeValueRepository repository;
 
 
-	@GetMapping("/currency-exchange/from/{from}/to/{to}")
-	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to,
-			@RequestHeader Map<String, String> headers) {
+    @GetMapping("/currency-exchange/from/{from}/to/{to}")
+    public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to,
+                                               @RequestHeader Map<String, String> headers) {
 
-		printAllHeaders(headers);
+        printAllHeaders(headers);
 
-		ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
+        ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
 
-		LOGGER.info("{} {} {}", from, to, exchangeValue);
+        LOGGER.info("{} {} {}", from, to, exchangeValue);
 
-		if (exchangeValue == null) {
-			throw new RuntimeException("Unable to find data to convert " + from + " to " + to);
-		}
+        if (exchangeValue == null) {
+            throw new RuntimeException("Unable to find data to convert " + from + " to " + to);
+        }
 
-		return exchangeValue;
-	}
+        return exchangeValue;
+    }
 
-	private void printAllHeaders(Map<String, String> headers) {
-		headers.forEach((key, value) -> {
-			LOGGER.info(String.format("Header '%s' = %s", key, value));
-		});
-	}
+    private void printAllHeaders(Map<String, String> headers) {
+        headers.forEach((key, value) -> {
+            LOGGER.info(String.format("Header '%s' = %s", key, value));
+        });
+    }
 }
