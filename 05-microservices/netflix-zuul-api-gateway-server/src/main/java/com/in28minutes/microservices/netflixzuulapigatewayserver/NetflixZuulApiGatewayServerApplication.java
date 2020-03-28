@@ -13,12 +13,12 @@ import brave.sampler.Sampler;
 @SpringBootApplication
 public class NetflixZuulApiGatewayServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NetflixZuulApiGatewayServerApplication.class, args);
-	}
-	
-	@Bean
-	public Sampler defaultSampler(){
-		return Sampler.ALWAYS_SAMPLE;
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NetflixZuulApiGatewayServerApplication.class, args);
+    }
+
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
+    }
 }
